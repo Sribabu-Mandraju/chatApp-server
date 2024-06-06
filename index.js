@@ -30,7 +30,7 @@ mongoose.connect(uri, options)
   });
 
 app.use("/api", (req, res) => {
-  res.send("hello world");
+  res.send("hello")
 });
 
 
