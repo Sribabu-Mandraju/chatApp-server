@@ -1,0 +1,21 @@
+###
+POST http://localhost:3000/signup2
+Content-Type: application/json
+
+{
+    "name": "nagendra",
+    "password": "12212123",
+    "email": "nagendra@gmail.com",
+    "ID": "knb123456"
+}
+
+
+###
+POST http://localhost:3000/signin
+Content-Type: application/json
+
+{
+    "email":"nagendra@gmail.com",
+    "password": "12212123"
+    
+}

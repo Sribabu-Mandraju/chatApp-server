@@ -1,18 +1,24 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
-
+import dotenv from 'dotenv'
+import AuthRoutes from './routes/auth.routes.js'
+import MessageRoute from './routes/message.routes.js'
+dotenv.config()
 const app = express();
 app.use(bodyParser.json());
 app.use(express.json({ limit: "30mb" }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
+const PORT = process.env.PORT || 3000;
+app.use("/",AuthRoutes)
+app.use("/msg",MessageRoute)
 
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
 
-const dbName = 'CHAT_APP';
+const dbName = 'realTimeApplication';
 
 const uri = `mongodb+srv://sribabu:63037sribabu@atlascluster.k6u2oy9.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
@@ -21,7 +27,7 @@ mongoose.connect(uri, options)
     console.log(`Connected to MongoDB database: ${dbName}`);
 
     // app.use("/message",messageRoutes)
-    app.listen(3000, () => {
+    app.listen(PORT, () => {
       console.log(`Server running on port 3000 😅😂`);
     });
   })
