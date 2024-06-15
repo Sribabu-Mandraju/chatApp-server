@@ -4,6 +4,7 @@ import express from 'express';
 import bcrypt from 'bcrypt'
 import { hashPassword } from '../helpers/hashPassword.helpers.js';
 import dotenv from 'dotenv'
+import { generateTokenAndSetCookie } from '../middlewares/generateToken.middlewares.js';
 dotenv.config()
 
 
@@ -127,13 +128,15 @@ export const signIn = async (req, res, next) => {
             });
         }
 
-        // Passwords match, generate JWT token and return it
-        const token = generateToken(user);
-        res.cookie("jwt",token,{
-            httpOnly:true
+        generateTokenAndSetCookie(user._id,res)
+
+        res.status(200).json({
+            _id:user._id,
+            name:user.name,
+            email:user.email,
+            token:req.cookies.jwt
         })
 
-        return res.status(200).json({ token });
     } catch (err) {
         console.error("Error while signing in:", err);
         return res.status(500).json({

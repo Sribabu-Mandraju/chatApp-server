@@ -1,12 +1,12 @@
 ###
-POST http://localhost:3000/signup2
+POST http://localhost:3000/signup
 Content-Type: application/json
 
 {
-    "name": "sribabu",
+    "name": "sribabu Mandraju",
     "password": "12212123",
-    "email": "sribabu@gmail.com",
-    "ID": "sribabu"
+    "email": "sribabumandraju@gmail.com",
+    "ID": "sribabu Mandraju"
 }
 
 
@@ -15,7 +15,7 @@ POST http://localhost:3000/signin
 Content-Type: application/json
 
 {
-    "email":"nagendra@gmail.com",
+    "email":"sribabu@gmail.com",
     "password": "12212123"
     
 }
@@ -26,16 +26,14 @@ Content-Type: application/json
 
 
 ###
-POST http://localhost:3000/msg/sendMessage
+POST http://localhost:3000/msg/sendMessage/6669c771b3214de7f3632479
 Content-Type: application/json
 
 {
-    "message": "Hi , I am fine?",
-    "senderId": "6669c771b3214de7f3632479",
-    "receiverId": "6661a0fee8a3b33be43a484a"
+    "message": "Hi , I am fine?"
 }
 
 
 ###
-GET http://localhost:3000/msg/getMessages/
+GET http://localhost:3000/msg/getMessages/6661a0fee8a3b33be43a484a/6669c771b3214de7f3632479
 Content-Type: application/json
