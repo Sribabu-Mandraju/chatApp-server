@@ -3,15 +3,18 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv'
 import AuthRoutes from './routes/auth.routes.js'
+import cookieParser from 'cookie-parser';
 import MessageRoute from './routes/message.routes.js'
 dotenv.config()
 const app = express();
 app.use(bodyParser.json());
 app.use(express.json({ limit: "30mb" }));
+app.use(cookieParser())
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
 const PORT = process.env.PORT || 3000;
 app.use("/",AuthRoutes)
 app.use("/msg",MessageRoute)
+
 
 const options = {
   useNewUrlParser: true,

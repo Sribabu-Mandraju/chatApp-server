@@ -19,3 +19,23 @@ Content-Type: application/json
     "password": "12212123"
     
 }
+
+###
+GET http://localhost:3000/allUsers
+Content-Type: application/json
+
+
+###
+POST http://localhost:3000/msg/sendMessage
+Content-Type: application/json
+
+{
+    "message": "Hi , I am fine?",
+    "senderId": "6669c771b3214de7f3632479",
+    "receiverId": "6661a0fee8a3b33be43a484a"
+}
+
+
+###
+GET http://localhost:3000/msg/getMessages/
+Content-Type: application/json
