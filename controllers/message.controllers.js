@@ -2,13 +2,14 @@ import express from 'express';
 import Conversation from '../models/conversation.models.js';
 import Message from '../models/message.models.js';
 import mongoose from 'mongoose';
+const { ObjectId } = mongoose.Types;
+
 
 
 export const sendMessage = async (req, res) => {
     const { message } = req.body;
-    const {id:receiverId} = req.params
-    const senderId = req.user._id
-
+    const { senderId, receiverId } = req.params;
+    
     if (!senderId || !receiverId || !message) {
         return res.status(400).json({ error: 'senderId' });
     }
@@ -50,17 +51,26 @@ export const sendMessage = async (req, res) => {
     }
 };
 
-export const getMessages = async(req,res) => {
+export const getMessages = async (req, res) => {
     try {
-        const {userId,charToId} = req.params;
+        const { userId, charToId } = req.params;
+
+        // Ensure userId and charToId are valid ObjectId strings
+        if (!ObjectId.isValid(userId) || !ObjectId.isValid(charToId)) {
+            return res.status(400).json({ error: 'Invalid ID format' });
+        }
+
         const conversation = await Conversation.findOne({
-            participants:{$all:{userId,charToId}}
-        }).populate("messages")
+            participants: { $all: [new ObjectId(userId), new ObjectId(charToId)] }
+        }).populate('messages');
 
-        res.status(200).json(conversation.messages)
+        if (!conversation) {
+            return res.status(404).json({ error: 'Conversation not found' });
+        }
+
+        res.status(200).json(conversation.messages);
     } catch (error) {
-        console.log("error sending messages")
+        console.error('Error fetching messages:', error);
         res.status(500).json({ error: 'Internal server error', details: error.message });
-
     }
-}
+};

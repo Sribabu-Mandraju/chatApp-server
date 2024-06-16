@@ -26,7 +26,7 @@ Content-Type: application/json
 
 
 ###
-POST http://localhost:3000/msg/sendMessage/6669c771b3214de7f3632479
+POST http://localhost:3000/msg/sendMessage/6669c771b3214de7f3632479/6661a0fee8a3b33be43a484a
 Content-Type: application/json
 
 {
