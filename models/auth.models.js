@@ -16,14 +16,7 @@ const userSchema = new Schema({
         type:String,
         required:true,
         unique:true,
-    },
-    ID:{
-        type:String,
-        unique:true,
-        minlength:6,
-        required:true
-    },
-
-})
+    }
+   })
 const User =  mongoose.model('User',userSchema)
 export default User

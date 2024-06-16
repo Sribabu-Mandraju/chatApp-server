@@ -68,7 +68,8 @@ export const getUserById = async (req,res,next) => {
 
 
 export const signUp = async (req, res, next) => {
-    const { name, email, password ,ID} = req.body;
+    const { name, email, password } = req.body;
+    console.log(name,email,password)
 
     try {
         // Check if the user already exists
@@ -88,7 +89,6 @@ export const signUp = async (req, res, next) => {
             name,
             email,
             password: hashedPassword,
-            ID
         });
 
         // Save the user to the database

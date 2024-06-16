@@ -2,6 +2,7 @@ import express from 'express';
 import Conversation from '../models/conversation.models.js';
 import Message from '../models/message.models.js';
 import mongoose from 'mongoose';
+import User from '../models/auth.models.js';
 const { ObjectId } = mongoose.Types;
 
 
@@ -74,3 +75,17 @@ export const getMessages = async (req, res) => {
         res.status(500).json({ error: 'Internal server error', details: error.message });
     }
 };
+
+export const getAllChats = async (req,res) => {
+    try{
+        const userId = req.params.id;
+        const users = await User.find({_id:{$ne :userId}}).select("-password")
+        res.status(200).json(users)
+    }
+    catch(err){
+        console.log("error aat getAllChats func",err);
+        res.status(500).json({
+            error:err.message
+        })
+    }
+}

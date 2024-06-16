@@ -5,8 +5,7 @@ Content-Type: application/json
 {
     "name": "sribabu Mandraju",
     "password": "12212123",
-    "email": "sribabumandraju@gmail.com",
-    "ID": "sribabu Mandraju"
+    "email": "sribabumandraju@gmail.com"
 }
 
 
@@ -26,14 +25,19 @@ Content-Type: application/json
 
 
 ###
-POST http://localhost:3000/msg/sendMessage/6669c771b3214de7f3632479/6661a0fee8a3b33be43a484a
+POST http://localhost:3000/msg/sendMessage/6661a0fee8a3b33be43a484a/666d367de906e7f77fe3b838
 Content-Type: application/json
 
 {
-    "message": "Hi , I am fine?"
+    "message": "Hi nag "
 }
 
 
 ###
-GET http://localhost:3000/msg/getMessages/6661a0fee8a3b33be43a484a/6669c771b3214de7f3632479
+GET http://localhost:3000/msg/getMessages/6661a0fee8a3b33be43a484a/666d367de906e7f77fe3b838
+Content-Type: application/json
+
+
+###
+GET http://localhost:3000/msg/getChats/6669c771b3214de7f3632479
 Content-Type: application/json

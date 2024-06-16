@@ -5,15 +5,30 @@ import dotenv from 'dotenv'
 import AuthRoutes from './routes/auth.routes.js'
 import cookieParser from 'cookie-parser';
 import MessageRoute from './routes/message.routes.js'
+import cors from 'cors'
+
 dotenv.config()
 const app = express();
 app.use(bodyParser.json());
 app.use(express.json({ limit: "30mb" }));
 app.use(cookieParser())
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+};
+app.use(cors());
 const PORT = process.env.PORT || 3000;
 app.use("/",AuthRoutes)
 app.use("/msg",MessageRoute)
+
+const allowedOrigins = ['http://localhost:5173'];
+
 
 
 const options = {
