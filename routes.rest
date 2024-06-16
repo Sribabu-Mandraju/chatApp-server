@@ -3,9 +3,9 @@ POST http://localhost:3000/signup
 Content-Type: application/json
 
 {
-    "name": "sribabu Mandraju",
-    "password": "12212123",
-    "email": "sribabumandraju@gmail.com"
+    "name": "adminoftheyear",
+    "password": "123312312",
+    "email": "admin123@gmail.com"
 }
 
 
