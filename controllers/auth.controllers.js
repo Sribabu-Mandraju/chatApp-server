@@ -46,15 +46,13 @@ export const getAllUser = async (req, res, next) => {
 export const getUserById = async (req,res,next) => {
     try{
         const id = req.params.id
-        const user = await User.findById(id)
+        const user = await User.findById(id).select("-password")
         if(!user){
             return res.status(404).json({
                 "message":"no user found"
             })
         }
-        return res.status(200).json({
-            user:user
-        })
+        return res.status(200).json(user)
     }
     catch(err){
         res.status(400).json({
@@ -134,7 +132,6 @@ export const signIn = async (req, res, next) => {
             _id:user._id,
             name:user.name,
             email:user.email,
-            token:req.cookies.jwt
         })
 
     } catch (err) {

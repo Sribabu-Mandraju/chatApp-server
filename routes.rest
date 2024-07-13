@@ -4,8 +4,8 @@ Content-Type: application/json
 
 {
     "name": "adminoftheyear",
-    "password": "123312312",
-    "email": "admin123@gmail.com"
+    "password": "20",
+    "email": "sri@demo.com"
 }
 
 
@@ -14,8 +14,8 @@ POST http://localhost:3000/signin
 Content-Type: application/json
 
 {
-    "email":"sribabu@gmail.com",
-    "password": "12212123"
+    "email":"sri@demo.com",
+    "password": "20"
     
 }
 
@@ -23,18 +23,23 @@ Content-Type: application/json
 GET http://localhost:3000/allUsers
 Content-Type: application/json
 
-
 ###
-POST http://localhost:3000/msg/sendMessage/6661a0fee8a3b33be43a484a/666d367de906e7f77fe3b838
+
+GET http://localhost:3000/user/666f1aa4bc640659de0e54ae
+Content-Type: application/json
+
+
+###w
+POST http://localhost:3000/msg/sendMessage/668969d080af77638b268f3d/6661a0fee8a3b33be43a484a
 Content-Type: application/json
 
 {
-    "message": "Hi nag "
+    "message": "nee problem enti bangaram "
 }
 
 
 ###
-GET http://localhost:3000/msg/getMessages/6661a0fee8a3b33be43a484a/666d367de906e7f77fe3b838
+GET http://localhost:3000/msg/getMessages/668969d080af77638b268f3d/666d367de906e7f77fe3b838
 Content-Type: application/json
 
 
