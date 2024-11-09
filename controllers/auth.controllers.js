@@ -5,6 +5,8 @@ import bcrypt from 'bcrypt'
 import { hashPassword } from '../helpers/hashPassword.helpers.js';
 import dotenv from 'dotenv'
 import { generateTokenAndSetCookie } from '../middlewares/generateToken.middlewares.js';
+
+
 dotenv.config()
 
 

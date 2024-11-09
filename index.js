@@ -1,18 +1,34 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
-import dotenv from 'dotenv'
-import AuthRoutes from './routes/auth.routes.js'
+import dotenv from 'dotenv';
+import http from 'http'; // Import http
+import { Server } from 'socket.io'; // Import socket.io
+import AuthRoutes from './routes/auth.routes.js';
+import Auth2Routes from './routes/auth2.routes.js'
 import cookieParser from 'cookie-parser';
-import MessageRoute from './routes/message.routes.js'
-import cors from 'cors'
+import MessageRoute from './routes/message.routes.js';
+import cors from 'cors';
+import socketHandler from './sockets/socket.js'; // Import your socket handler
 
-dotenv.config()
+dotenv.config();
 const app = express();
+const server = http.createServer(app); // Create HTTP server
+const io = new Server(server, { // Initialize Socket.IO with the HTTP server
+  cors: {
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"]
+  }
+});
+
 app.use(bodyParser.json());
 app.use(express.json({ limit: "30mb" }));
-app.use(cookieParser())
+app.use(cookieParser());
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
+app.use(cors());
+
+const allowedOrigins = ['http://localhost:5173'];
+
 const corsOptions = {
   origin: function (origin, callback) {
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
@@ -22,14 +38,11 @@ const corsOptions = {
     }
   }
 };
-app.use(cors());
+
 const PORT = process.env.PORT || 3000;
-app.use("/",AuthRoutes)
-app.use("/msg",MessageRoute)
-
-const allowedOrigins = ['http://localhost:5173'];
-
-
+app.use("/", AuthRoutes);
+app.use("/main", Auth2Routes);
+app.use("/msg", MessageRoute);
 
 const options = {
   useNewUrlParser: true,
@@ -44,9 +57,11 @@ mongoose.connect(uri, options)
   .then(() => {
     console.log(`Connected to MongoDB database: ${dbName}`);
 
-    // app.use("/message",messageRoutes)
-    app.listen(PORT, () => {
-      console.log(`Server running on port 3000 😅😂`);
+    // Integrate socket handler
+    socketHandler(io);
+
+    server.listen(PORT, () => {
+      console.log(`Server running on port ${PORT} 😅😂`);
     });
   })
   .catch((err) => {
@@ -54,10 +69,5 @@ mongoose.connect(uri, options)
   });
 
 app.use("/api", (req, res) => {
-  res.send("hello")
+  res.send("hello");
 });
-
-
-
-
-
