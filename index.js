@@ -16,8 +16,8 @@ const app = express();
 const server = http.createServer(app); // Create HTTP server
 const io = new Server(server, { // Initialize Socket.IO with the HTTP server
   cors: {
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST"]
+    origin: "*",
+    methods: ["GET", "POST","PUT","Delete","PATCH"]
   }
 });
 
@@ -45,9 +45,9 @@ app.use("/main", Auth2Routes);
 app.use("/msg", MessageRoute);
 
 const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-};
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+ };
 
 const dbName = 'realTimeApplication';
 

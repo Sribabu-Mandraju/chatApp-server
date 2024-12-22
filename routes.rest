@@ -3,9 +3,9 @@ POST http://localhost:3000/signup
 Content-Type: application/json
 
 {
-    "name": "adminoftheyear",
-    "password": "20",
-    "email": "sri@demo.com"
+    "name": "Sriii",
+    "password": "123456",
+    "email": "sribabu@gmai.com"
 }
 
 
@@ -21,12 +21,12 @@ Content-Type: application/json
 
 
 ###
-POST http://localhost:3000/main/signin
+POST http://localhost:3000/signin
 Content-Type: application/json
 
 {
-    "password": "20kjsdfjk",
-    "email": "sri@demo.com"
+    "password": "123456",
+    "email": "sribabu@gmai.com"
 }
 
 
